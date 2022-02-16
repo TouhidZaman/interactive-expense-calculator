@@ -1,5 +1,6 @@
+/* custom styles for expense calculator  */
 .section_title {
-    background: -webkit-linear-gradient(#444f5f38, #374356);
+    background: -webkit-linear-gradient(#444f5f8f, #374356);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;

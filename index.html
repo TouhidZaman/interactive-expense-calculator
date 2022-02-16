@@ -16,50 +16,77 @@
         <section class="expense_calculator_section pt-4">
             <h1 class="section_title text-center">NT's Expense Calculator</h1>
             <div class="container">
-                <div class="row mt-5">
+                <div class="row mt-md-5">
                     <div class="col-12 col-lg-6">
                         <div class="expense-image-area">
-                            <img src="images/expenses-calculate.jpg" class="img-fluid" alt="Expense Image">
+                            <img src="images/bank-note-flatline.png" class="img-fluid" alt="Expense Image">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <div class="expense-claculator-area col-10 mx-auto shadow px-5">
-                            <div class="income-area">
-                                <h3 class="text-center pb-3">Income</h3>
-                                <div class="mb-3 row pb-4">
-                                    <label for="income-input" class="col-sm-2 col-form-label">Income:</label>
-                                    <div class="col-sm-10">
-                                      <input type="number" id="income-input" class="form-control">
+                        <div class="col-12 col-md-10 mx-auto shadow px-5 py-4 mb-5">
+                            <!-- EXPENSE CALCULATIONS AREA  -->
+                            <div class="expense-claculator">
+                                <!-- Income -->
+                                <div class="income-area">
+                                    <h3 class="text-center pb-3">Income</h3>
+                                    <div class="mb-3 row pb-4">
+                                        <label for="income-input" class="col-sm-2 col-form-label">Income:</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" id="income-input" placeholder="enter your earnings" class="form-control">
+                                        </div>
                                     </div>
+                                </div>
+                                <!-- expenses  -->
+                                <div class="expense-area">
+                                    <h3 class="text-center pb-3">Expenses</h3>
+                                    <div class="mb-3 row">
+                                        <label for="food-cost-input" class="col-sm-2 col-form-label">Food:</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" id="food-cost-input" placeholder="enter total food cost" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="rent-cost-input" class="col-sm-2 col-form-label">Rent:</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" id="rent-cost-input" placeholder="enter total rent cost" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="cloths-cost-input" class="col-sm-2 col-form-label">Clothes:</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" id="cloths-cost-input" placeholder="enter total cloths cost" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- expense calculate button  -->
+                                <div class="d-flex justify-content-end py-2">
+                                    <button onclick="calculateExpenses()" class="text-center btn btn-info px-3 px-md-4 fw-bold text-white">Calculate</button>
+                                </div>
+                                <!-- Expense display  -->
+                                <div class="balance-disply-area py-4">
+                                    <h4>Total Expenses: $<span id="expenses-total">00</span></h4>
+                                    <h4>Balance: $<span id="balence-total">00</span></h4>
                                 </div>
                             </div>
-                            <div class="expense-area">
-                                <h3 class="text-center pb-3">Expense</h3>
+                            <!-- SAVINGS AREA -->
+                            <div class="savings-zone">
+                                <h3 class="text-center pb-3">Add Some Savings</h3>
+                                <!-- savings  -->
                                 <div class="mb-3 row">
-                                    <label for="food-cost-input" class="col-sm-2 col-form-label">Food:</label>
-                                    <div class="col-sm-10">
-                                      <input type="number" id="food-cost-input" class="form-control">
+                                    <label for="income-input" class="col-12 col-md-2 col-form-label">Save:</label>
+                                    <div class="col-5 col-md-4">
+                                        <input type="number" id="income-input" placeholder="percent" class="form-control">
+                                    </div>
+                                    <div class="col-2 col-md-1 d-flex align-items-center justify-content-center"><h4>%</h4></div>
+                                    <div class="col-5 col-md-5">
+                                        <button onclick="addSavings()" class="btn btn-info w-100 fw-bold text-white">Save</button>
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
-                                    <label for="rent-cost-input" class="col-sm-2 col-form-label">Rent:</label>
-                                    <div class="col-sm-10">
-                                      <input type="number" id="rent-cost-input" class="form-control">
-                                    </div>
+                                <!-- Savings display  -->
+                                <div class="savings-disply-area py-4">
+                                    <h4>Saving Amount: $<span id="savings-total">00</span></h4>
+                                    <h4>Remaining Balance: $<span id="remaining-total">00</span></h4>
                                 </div>
-                                <div class="mb-3 row">
-                                    <label for="cloths-cost-input" class="col-sm-2 col-form-label">Clothes:</label>
-                                    <div class="col-sm-10">
-                                      <input type="number" id="cloths-cost-input" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <button onclick="calculate()" class="text-center btn btn-lg btn-info px-3 text-white shadow">Calculate</button>
-                            </div>
-                            <div class="balance-disply-area py-4">
-                                <h4>Total Expenses: $<span id="expenses-total">5500</span></h4>
-                                <h4>Balance: $<span id="balence-total">4500</span></h4>
                             </div>
                         </div>
                     </div>
