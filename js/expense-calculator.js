@@ -27,6 +27,44 @@ function reset(isSavings) {
     }
 }
 
+//For Calculating expenses and savings
+function updateAllAmounts(amount, fieldId, isExpenses) {
+    const ErrorField = document.getElementById(fieldId);
+    if(isExpenses) {
+        //FOR EXPENSES
+        if(amount <= income) {
+            // updating Total Expenses and Balance 
+            updateFieldValue(amount, 'expenses-total');
+            balence = income - amount;
+            updateFieldValue(balence, 'balence-total');
+            ErrorField.style.display = 'none';
+            reset(true); // reseting savings for new income and balance
+        }
+        else {
+            ErrorField.innerText = "Opps ! Your expenses are much bigger then your income";
+            ErrorField.style.display = 'block';
+            reset(false);
+        }
+    } 
+    else {
+        //FOR SAVINGS
+        //checking, is savings amount less then balance and balence isn't empty
+        if(amount <= balence && balence > 0) {
+            // updating Saving Amount and Remaining Balance
+            updateFieldValue(amount, 'savings-total');
+            const remainingBalance = balence - amount;
+            updateFieldValue(remainingBalance, 'remaining-total');
+            ErrorField.style.display = 'none';
+        }
+        else {
+            ErrorField.innerText = "Opps ! Not enough balance for savings";
+            ErrorField.style.display = 'block';
+            reset(true);
+        }
+    }
+}
+
+//getting input values from input after validation
 function getInputValue(inputId) {
     const inputField = document.getElementById(inputId);
     const inputFieldText = inputField.value;
@@ -56,6 +94,7 @@ function getInputValue(inputId) {
     }
 }
 
+//For calculating expenses from income
 function calculateExpenses() {
     income = getInputValue('income-input');
     const foodCost = getInputValue('food-cost-input');
@@ -65,22 +104,9 @@ function calculateExpenses() {
     //checking, is inputs valid or not
     if(income != 'invalid' && foodCost != 'invalid' && rentCost != 'invalid' 
     && clothsCost != 'invalid') {
-        const expenses = foodCost + rentCost + clothsCost;
-        const expenseErrorField = document.getElementById('expense-error-message');
-        
-        //Checking is expenses less then income
-        if(expenses <= income) {
-            // updating Total Expenses and Balance 
-            updateFieldValue(expenses, 'expenses-total');
-            balence = income - expenses;
-            updateFieldValue(balence, 'balence-total');
-            expenseErrorField.style.display = 'none';
-        }
-        else {
-            expenseErrorField.innerText = "Opps ! Your expenses are much bigger then your income"
-            expenseErrorField.style.display = 'block';
-            reset(false);
-        }
+        const totalExpenses = foodCost + rentCost + clothsCost;
+        // To update expense and balance
+        updateAllAmounts(totalExpenses, 'expense-error-message', true);
     }
     else reset(false);
 }
@@ -91,22 +117,9 @@ function addSavings() {
 
     //Checking, is savings percent valid or not
     if(savingsPercent != 'invalid') {
-        const savings = (income * savingsPercent) / 100;
-        const savingsErrorField = document.getElementById('savings-error-message');
-        
-        //checking, is savings amount less then balance and balence isn't empty
-        if(savings <= balence && balence > 0) {
-            // updating Saving Amount and Remaining Balance
-            updateFieldValue(savings, 'savings-total');
-            const remainingBalance = balence - savings;
-            updateFieldValue(remainingBalance, 'remaining-total');
-            savingsErrorField.style.display = 'none';
-        }
-        else {
-            savingsErrorField.innerText = "Opps ! Not enough balance for savings";
-            savingsErrorField.style.display = 'block';
-            reset(true);
-        }
+        const savingsAmount = (income * savingsPercent) / 100;
+        // To update savings and remaining balance
+        updateAllAmounts(savingsAmount, 'savings-error-message', false);
     }
     else reset(true);
 }
