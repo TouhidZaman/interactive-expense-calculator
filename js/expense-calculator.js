@@ -38,7 +38,10 @@ function updateAllAmounts(amount, fieldId, isExpenses) {
             balence = income - amount;
             updateFieldValue(balence, 'balence-total');
             ErrorField.style.display = 'none';
-            reset(true); // reseting savings for new income and balance
+
+            // reseting savings for new income and balance
+            document.getElementById('savings-error-message').style.display = 'none'
+            reset(true);
         }
         else {
             ErrorField.innerText = "Opps ! Your expenses are much bigger then your income";
