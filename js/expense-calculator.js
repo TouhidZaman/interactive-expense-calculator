@@ -1,10 +1,31 @@
 let income = 0;
 let balence = 0;
 
-// function UpdateField(value, fieldId) {
-//    const field =  document.getElementById(fieldId);
-//    field.innerText = value;
-// }
+//For Updating Field texts/values
+function updateFieldValue(value, fieldId) {
+   const field =  document.getElementById(fieldId);
+   field.innerText = value;
+}
+
+//reseting to it's default
+function reset(isSavings) {
+    if(isSavings) {
+        //resetings savings and remaining balance
+        updateFieldValue('00', 'savings-total');
+        updateFieldValue('00', 'remaining-total');
+    }
+    else {
+        income = 0;
+        balence = 0;
+        //resetings expense and balance
+        updateFieldValue('00', 'expenses-total');
+        updateFieldValue('00', 'balence-total');
+
+        //resetings savings and remaining balance
+        updateFieldValue('00', 'savings-total');
+        updateFieldValue('00', 'remaining-total');
+    }
+}
 
 function getInputValue(inputId) {
     const inputField = document.getElementById(inputId);
@@ -29,7 +50,6 @@ function getInputValue(inputId) {
         return 'invalid';
     }
     else {
-        // inputField.classList.replace('is-invalid', 'is-valid');
         inputField.classList.remove('is-invalid');
         inputField.classList.add('is-valid');
         return inputValue;
@@ -41,9 +61,7 @@ function calculateExpenses() {
     const foodCost = getInputValue('food-cost-input');
     const rentCost = getInputValue('rent-cost-input');
     const clothsCost = getInputValue('cloths-cost-input');
-    const balanceTotalField = document.getElementById('balence-total');
-    const expenseTotalField = document.getElementById('expenses-total');
-
+    
     //checking, is inputs valid or not
     if(income != 'invalid' && foodCost != 'invalid' && rentCost != 'invalid' 
     && clothsCost != 'invalid') {
@@ -52,50 +70,43 @@ function calculateExpenses() {
         
         //Checking is expenses less then income
         if(expenses <= income) {
-            expenseTotalField.innerText = expenses;
+            // updating Total Expenses and Balance 
+            updateFieldValue(expenses, 'expenses-total');
             balence = income - expenses;
-            balanceTotalField.innerText = balence;
+            updateFieldValue(balence, 'balence-total');
             expenseErrorField.style.display = 'none';
         }
         else {
             expenseErrorField.innerText = "Opps ! Your expenses are much bigger then your income"
             expenseErrorField.style.display = 'block';
-            expenseTotalField.innerText = '00';
-            balanceTotalField.innerText = '00';
+            reset(false);
         }
     }
-    else {
-        expenseTotalField.innerText = '00';
-        balanceTotalField.innerText = '00';
-    }
+    else reset(false);
 }
 
 //For Savings some amount from balance
 function addSavings() {
     const savingsPercent  = getInputValue('savings-input');
-    const savingsErrorField = document.getElementById('savings-error-message');
-    const savingsTotalField = document.getElementById('savings-total');
-    const remainingTotalField = document.getElementById('remaining-total');
-    
+
     //Checking, is savings percent valid or not
     if(savingsPercent != 'invalid') {
         const savings = (income * savingsPercent) / 100;
+        const savingsErrorField = document.getElementById('savings-error-message');
         
         //checking, is savings amount less then balance and balence isn't empty
         if(savings <= balence && balence > 0) {
-            savingsTotalField.innerText = savings;
-            remainingTotalField.innerText = balence - savings;
+            // updating Saving Amount and Remaining Balance
+            updateFieldValue(savings, 'savings-total');
+            const remainingBalance = balence - savings;
+            updateFieldValue(remainingBalance, 'remaining-total');
             savingsErrorField.style.display = 'none';
         }
         else {
             savingsErrorField.innerText = "Opps ! Not enough balance for savings";
             savingsErrorField.style.display = 'block';
-            savingsTotalField.innerText = '00';
-            remainingTotalField.innerText = '00';
+            reset(true);
         }
     }
-    else {
-        savingsTotalField.innerText = '00';
-        remainingTotalField.innerText = '00';
-    }
+    else reset(true);
 }
