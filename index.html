@@ -13,26 +13,31 @@
         <title>NT's Expense Calculator</title>
     </head>
     <body>
-        <section class="expense_calculator_section pt-4">
-            <h1 class="section_title text-center">NT's Expense Calculator</h1>
-            <div class="container">
-                <div class="row mt-md-5">
-                    <div class="col-12 col-lg-6">
-                        <div class="expense-image-area">
-                            <img src="images/bank-note-flatline.png" class="img-fluid" alt="Expense Image">
+        <section class="expense_calculator_section">
+            <div class="shadow shadow py-2">
+                <h1 class="section_title text-center">NT's Expense Calculator</h1>
+            </div>
+            <div class="container  mb-4 mb-md-5">
+                <div class="row shadow-sm mx-1 my-3 my-md-5">
+                    <!-- d-flex justify-content-center align-items-center -->
+                    <div class="col-12 col-lg-6 p-0 m-0 bg-white">
+                        <div class="expense-image-area w-100">
+                            <img src="images/expenses-calculate.jpg" class="w-100" alt="Expense Image">
+                            <img src="images/note-flatline.png" class="w-100 d-none d-md-block" alt="Expense Image">
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="col-12 col-md-10 mx-auto shadow px-5 py-4 mb-5">
+                    <div class="col-12 col-lg-6 bg-custom-gray">
+                        <div class="col-12 col-md-10 mx-auto px-4 px-md-5 py-4">
                             <!-- EXPENSE CALCULATIONS AREA  -->
                             <div class="expense-claculator">
                                 <!-- Income -->
                                 <div class="income-area">
                                     <h3 class="text-center pb-3">Income</h3>
                                     <div class="mb-3 row pb-4">
-                                        <label for="income-input" class="col-sm-2 col-form-label">Income:</label>
+                                        <label for="income-input" class="col-sm-2 col-form-label">Income: </label>
                                         <div class="col-sm-10">
-                                            <input type="number" id="income-input" placeholder="enter your earnings" class="form-control">
+                                            <input type="text" id="income-input" placeholder="enter your earnings" class="form-control">
+                                            <span class="invalid-feedback" id="income-input-message"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -42,19 +47,22 @@
                                     <div class="mb-3 row">
                                         <label for="food-cost-input" class="col-sm-2 col-form-label">Food:</label>
                                         <div class="col-sm-10">
-                                            <input type="number" id="food-cost-input" placeholder="enter total food cost" class="form-control">
+                                            <input type="text" id="food-cost-input" placeholder="enter total food cost" class=" form-control">
+                                            <span class="invalid-feedback" id="food-cost-input-message"></span>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="rent-cost-input" class="col-sm-2 col-form-label">Rent:</label>
                                         <div class="col-sm-10">
-                                            <input type="number" id="rent-cost-input" placeholder="enter total rent cost" class="form-control">
+                                            <input type="text" id="rent-cost-input" placeholder="enter total rent cost" class=" form-control">
+                                            <span class="invalid-feedback" id="rent-cost-input-message"></span>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="cloths-cost-input" class="col-sm-2 col-form-label">Clothes:</label>
+                                        <label for="cloths-cost-input" class="col-sm-2 col-form-label">cloth:</label>
                                         <div class="col-sm-10">
-                                            <input type="number" id="cloths-cost-input" placeholder="enter total cloths cost" class="form-control">
+                                            <input type="text" id="cloths-cost-input" placeholder="enter total cloths cost" class=" form-control">
+                                            <span class="invalid-feedback" id="cloths-cost-input-message"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -64,6 +72,7 @@
                                 </div>
                                 <!-- Expense display  -->
                                 <div class="balance-disply-area py-4">
+                                    <h4 id="expense-error-message" class="text-danger"></h4>
                                     <h4>Total Expenses: $<span id="expenses-total">00</span></h4>
                                     <h4>Balance: $<span id="balence-total">00</span></h4>
                                 </div>
@@ -73,17 +82,19 @@
                                 <h3 class="text-center pb-3">Add Some Savings</h3>
                                 <!-- savings  -->
                                 <div class="mb-3 row">
-                                    <label for="income-input" class="col-12 col-md-2 col-form-label">Save:</label>
+                                    <label for="savings-input" class="col-12 col-md-2 col-form-label">Save:</label>
                                     <div class="col-5 col-md-4">
-                                        <input type="number" id="income-input" placeholder="percent" class="form-control">
+                                        <input type="text" id="savings-input" placeholder="percent" class=" form-control">
+                                        <span class="invalid-feedback" id="savings-input-message"></span>
                                     </div>
-                                    <div class="col-2 col-md-1 d-flex align-items-center justify-content-center"><h4>%</h4></div>
+                                    <div class="col-2 col-md-1 d-flex justify-content-center"><h4>%</h4></div>
                                     <div class="col-5 col-md-5">
                                         <button onclick="addSavings()" class="btn btn-info w-100 fw-bold text-white">Save</button>
                                     </div>
                                 </div>
                                 <!-- Savings display  -->
                                 <div class="savings-disply-area py-4">
+                                    <h4 id="savings-error-message" class="text-danger"></h4>
                                     <h4>Saving Amount: $<span id="savings-total">00</span></h4>
                                     <h4>Remaining Balance: $<span id="remaining-total">00</span></h4>
                                 </div>
